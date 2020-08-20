@@ -1,0 +1,18 @@
+<h1 class="mt-4">Page Heading</h1>
+
+<hr>
+
+<div class="card mb-4" *ngFor="let x of test">
+  <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+  <div class="card-body">
+    <h2 class="card-title">{{x.articlename}}</h2>
+    <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="test">{{x.article}}</p>
+    <a class="btn btn-primary">Read More &rarr;</a>
+  </div>
+  <div class="card-footer text-muted">
+    Posted on {{x.dateCreated}} by
+    <a href="">{{x.author}}</a>
+  </div>
+</div>
+
+<hr>
