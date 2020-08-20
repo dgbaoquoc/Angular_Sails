@@ -19,7 +19,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': { view: 'pages/homepage' },
+  '/': 'UserController.register',
+  'GET /register': 'UserController.register',
+  'POST /login': 'UserController.login'
 
 
   /***************************************************************************
