@@ -57,7 +57,42 @@ module.exports = {
         })
     },
 
-    
+  postArticle: function (req, res) {
+    var articlename = req.param("articlename");
+    var article = req.param("article");
+    var dateCreated = String(moment().format("MMM DD YY"));
+    if(articlename == "" || article == "") {
+      return res.json({status: "fail"});
+    }
+    else {
+      Articles.create({
+        articlename: articlename,
+        article: article,
+        dateCreated: dateCreated,
+      })
+        .then(function (data) {
+          return res.json({ status: "success" });
+        })
+        .catch(function (err) {
+          return res.json({status: "fail"})
+          console.log(err);
+        });
+    }
+  },
 
+  showArticles: function (req, res) {
+    var start = req.query.startArticle;
+    var search = req.query.searchArticle;
+    console.log(req.query);
+    Articles.find({where: {articlename: {contains: search}}})
+      .sort("id DESC")
+      .limit(2)
+      .skip(start)
+      .then(function (data) {
+        res.json({ status: "success", articles: data });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  },
 };
-

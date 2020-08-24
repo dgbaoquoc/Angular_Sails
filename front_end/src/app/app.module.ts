@@ -17,6 +17,12 @@ import { AuthGuard } from './guard/auth.guard';
 import { HomeComponent } from './components/home/home.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NavigateComponent } from './components/navigate/navigate.component';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ModalCreatePostsComponent } from './components/modal-create-posts/modal-create-posts.component';
+import { ArticlesComponent } from './components/articles/articles.component';
 
 
 @NgModule({
@@ -28,10 +34,20 @@ import { NavigateComponent } from './components/navigate/navigate.component';
     SpecialEventsComponent,
     HomeComponent,
     NavigateComponent,
+    NavbarComponent,
+    FooterComponent,
+    ArticlesComponent,
+    SidebarComponent,
+    ModalCreatePostsComponent,
   ],
   imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
+
+
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

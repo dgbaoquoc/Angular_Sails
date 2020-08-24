@@ -23,7 +23,9 @@ module.exports.routes = {
   'POST /register': 'UserController.register',
   'POST /login': 'UserController.login',
 
-  '/test': 'UserController.test'
+  '/test': 'UserController.test',
+  'POST /createArticle': 'UserController.postArticle',
+  'GET /showArticles': 'UserController.showArticles'
 
 
   /***************************************************************************
