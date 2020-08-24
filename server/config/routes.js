@@ -20,8 +20,10 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': 'UserController.register',
-  'GET /register': 'UserController.register',
-  'POST /login': 'UserController.login'
+  'POST /register': 'UserController.register',
+  'POST /login': 'UserController.login',
+
+  '/test': 'UserController.test'
 
 
   /***************************************************************************
