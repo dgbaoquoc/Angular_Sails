@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Article } from '../../models/article'
+import { AuthService } from '../../auth.service';
+import { Article } from '../../models/Article'
 
+declare var $:any
 
 @Component({
   selector: 'app-article-manager',
@@ -8,39 +10,42 @@ import { Article } from '../../models/article'
   styleUrls: ['./article-manager.component.css']
 })
 export class ArticleManagerComponent implements OnInit {
-  articles: Article[];
+  article: Article[];
 
-  constructor() { 
-  }
+  constructor(private _AuthService: AuthService) { }
 
-  ngOnInit() {
-    this.articles = [
-      {
-        id: 1,
-        title: 'chung ta da truong thanh nhu the day',
-        author: 'tuan',
-        date: new Date("Fri Dec 08 2019 07:44:57"),
-        description: 'blabloe',
-        content: 'luclasdnjasdnkj'
-      },
-      {
-        id: 2,
-        title: 'chung ta da truong thanh nhu the day',
-        author: 'tuan',
-        date: new Date("Fri Dec 08 2019 07:44:57"),
-        description: 'blabloe',
-        content: 'luclasdnjasdnkj'
-      },
-      {
-        id: 3,
-        title: 'chung ta da truong thanh nhu the day',
-        author: 'tuan',
-        date: new Date("Fri Dec 08 2019 07:44:57"),
-        description: 'blabloe',
-        content: 'luclasdnjasdnkj'
-      },
-    ]
-
+  ngOnInit(): void {
+    $ (document).ready( function() {
+      $('#example').DataTable( {
+          "processing": true,
+          "serverSide": true,
+          "ajax": {
+              "order": [[ 0, 'ASC' ]],
+              "url":"http://localhost:1337/getarticle",
+              "type":"GET",
+              "cache":true,
+              "complete":function(xhr, stt ) {
+                  console.log(xhr.responseText);
+                  console.log(status)
+              },
+          },
+          columns:  [
+              {    name: "id",
+                  render:$.fn.dataTable.render.text()
+          },
+              {   name: "title",
+                  render:$.fn.dataTable.render.text()
+          },
+              {   name: "author",
+                  render:$.fn.dataTable.render.text()
+          },
+              {   name: "date",
+                  render:$.fn.dataTable.render.text()
+          },
+              { name: null, "orderable":false },
+          ],
+      })
+  })
   }
 
 }

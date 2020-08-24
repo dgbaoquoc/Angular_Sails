@@ -1,38 +1,29 @@
-<div class="panel panel-warning" style="margin-top: 30px;">
-    <div class="panel-heading">
-        <h1 class="display-4">Article Manager</h1>
-    </div>
-    <div class="panel-body">
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>CreateDate</th>
-                    <th style="text-align: center;">Tools</th>
-                </tr>
-            </thead>
-            <tbody *ngIf="let article from article">
-                <tr>
-                    <th>{{ article.id}}</th>
-                    <th>{{ article.title }}</th>
-                    <th>{{ article.author }}</th>
-                    <th>{{ article.content }}</th>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Author</th>
-                    <th>CreateDate</th>
-                    <th style="text-align: center;">Tools</th>
-                </tr>
-            </tfoot>
-        </table>
+<div class="container">
+    <div class="panel panel-warning" style="margin-top: 30px;">
+        <div class="panel-heading">
+            <h1 class="display-4">Article Manager</h1>
+        </div>
+        <div class="panel-body">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>CreateDate</th>
+                        <th style="text-align: center;">Tools</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Author</th>
+                        <th>CreateDate</th>
+                        <th style="text-align: center;">Tools</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
-<!-- <ul *ngFor="let article of articles">
-    <li>{{ article.title }}</li>
-</ul> -->
