@@ -7,6 +7,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UserManagerComponent } from './components/user-manager/user-manager.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EventsComponent } from './components/events/events.component';
@@ -25,11 +26,13 @@ import { ModalCreatePostsComponent } from './components/modal-create-posts/modal
 import { ArticlesComponent } from './components/articles/articles.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
 import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component';
+import { ArticleManagerComponent } from './components/article-manager/article-manager.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserManagerComponent,
     LoginComponent,
     RegisterComponent,
     EventsComponent,
@@ -43,6 +46,7 @@ import { BodyHomepageComponent } from './components/body-homepage/body-homepage.
     ModalCreatePostsComponent,
     BlogPostComponent,
     BodyHomepageComponent,
+    ArticleManagerComponent
   ],
   imports: [
     CommonModule,

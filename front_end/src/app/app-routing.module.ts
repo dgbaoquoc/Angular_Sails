@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserManagerComponent } from './components/user-manager/user-manager.component'
+import { ArticleManagerComponent } from './components/article-manager/article-manager.component'
 import { EventsComponent } from './components/events/events.component';
 import { SpecialEventsComponent } from './components/special-events/special-events.component';
 import { LoginComponent } from './components/login/login.component';
@@ -41,7 +43,13 @@ const routes: Routes = [
   },
   {
     path: 'haha', component: BlogPostComponent
-  }
+  },
+  { path: 'usermanager',
+    component: UserManagerComponent
+  },
+  { path: 'articlemanager',
+    component: ArticleManagerComponent
+  },
 
 ];
 

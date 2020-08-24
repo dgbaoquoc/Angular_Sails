@@ -19,6 +19,14 @@ module.exports = {
       type: 'string',
       required: true
     },
+    first_name: {
+      type: 'string',
+      required: true
+    },
+    last_name: {
+      type: 'string',
+      required: true
+    },
     createdAt: {
       type: 'ref',
       columnType: 'datetime',
