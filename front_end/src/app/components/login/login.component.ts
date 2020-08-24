@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
               private _toastr: ToastrService) { }
 
   ngOnInit(): void {
+    if (this._auth.loggedIn()) {
+      this._router.navigate(['home']);
+    }
   }
   
   loginUser() {
