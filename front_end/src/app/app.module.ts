@@ -12,6 +12,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ArticlesComponent } from './components/articles/articles.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ModalCreatePostsComponent } from './components/modal-create-posts/modal-create-posts.component';
+import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component';
 
 
 // import { LoginComponent } from './components/login/login.component';
@@ -29,6 +31,8 @@ import { ModalCreatePostsComponent } from './components/modal-create-posts/modal
     ArticlesComponent,
     SidebarComponent,
     ModalCreatePostsComponent,
+    BlogPostComponent,
+    BodyHomepageComponent,
 
 
     // LoginComponent,

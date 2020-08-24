@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 // import { SpecialEventsComponent } from './components/special-events/special-events.component';
 // import { LoginComponent } from './components/login/login.component';
 // import { RegisterComponent } from './components/register/register.component';
+import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component'
 
 
 
@@ -29,6 +31,12 @@ const routes: Routes = [
   //   path: 'register',
   //   component: RegisterComponent
   // },
+  {
+    path: '', component: BodyHomepageComponent
+  },
+  {
+    path: 'haha', component: BlogPostComponent
+  }
 
 ];
 
