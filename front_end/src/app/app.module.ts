@@ -23,6 +23,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ModalCreatePostsComponent } from './components/modal-create-posts/modal-create-posts.component';
 import { ArticlesComponent } from './components/articles/articles.component';
+import { BlogPostComponent } from './components/blog-post/blog-post.component';
+import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { ArticlesComponent } from './components/articles/articles.component';
     ArticlesComponent,
     SidebarComponent,
     ModalCreatePostsComponent,
+    BlogPostComponent,
+    BodyHomepageComponent,
   ],
   imports: [
     CommonModule,
