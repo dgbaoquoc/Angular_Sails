@@ -7,7 +7,7 @@
   <div class="card-body">
     <h2 class="card-title">{{x.articlename}}</h2>
     <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="test">{{x.article}}</p>
-    <a class="btn btn-primary">Read More &rarr;</a>
+    <a class="btn btn-primary" (click)="read(x.id)">Read More &rarr;</a>
   </div>
   <div class="card-footer text-muted">
     Posted on {{x.dateCreated}} by

@@ -14,6 +14,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ModalCreatePostsComponent } from './components/modal-create-posts/modal-create-posts.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
 import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 // import { LoginComponent } from './components/login/login.component';
@@ -33,6 +34,7 @@ import { BodyHomepageComponent } from './components/body-homepage/body-homepage.
     ModalCreatePostsComponent,
     BlogPostComponent,
     BodyHomepageComponent,
+    PageNotFoundComponent,
 
 
     // LoginComponent,

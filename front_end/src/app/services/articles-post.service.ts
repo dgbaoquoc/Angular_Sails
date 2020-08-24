@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ArticlesPostService {
 
-  private getArticle = "http://localhost:1337/showArticles"
+  private getArticle = "http://localhost:1337/showArticles";
+  private getPost = "http://localhost:1337/getPost";
   constructor(private http: HttpClient) {}
 
   getArticles(data: any) : Observable<any> {
@@ -16,6 +17,10 @@ export class ArticlesPostService {
     //   parmam1 = parmam1.append(key, data[key])
     // })
     return this.http.get<any>(this.getArticle, {params: data});
+  }
+
+  getPostBlog(data: any) : Observable<any> {
+    return this.http.get<any>(this.getPost, {params: data});
   }
 
 }

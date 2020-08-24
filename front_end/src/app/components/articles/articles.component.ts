@@ -1,7 +1,8 @@
 import { Component, OnInit, Testability } from '@angular/core';
 import { ArticlesPostService } from 'src/app/services/articles-post.service';
 import { SendDataService } from '../../services/send-data.service';
-import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 declare var $: any;
 
 @Component({
@@ -10,8 +11,10 @@ declare var $: any;
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
+  subscription1: Subscription;
+  subscription2: Subscription;
   public test = [];
-  constructor(private _articlesPostService: ArticlesPostService, private _dataService: SendDataService, private toastr: ToastrService) { }
+  constructor(private _articlesPostService: ArticlesPostService, private _dataService: SendDataService, private router: Router) { }
   start = {
     startArticle: 0,
     searchArticle: ""
@@ -19,7 +22,7 @@ export class ArticlesComponent implements OnInit {
   ngOnInit() {
     var self = this;
     var x = 500;
-    this._dataService.valueFromSearch
+    this.subscription1 = this._dataService.valueFromSearch$
       .subscribe(function(chris) {
         self.test.length = 0;
         self.start.startArticle = 0;
@@ -35,35 +38,32 @@ export class ArticlesComponent implements OnInit {
             x += y;
         }
     });
-    this.showToastr();
   }
 
   takeArticles() {
     var self = this;
-    self._articlesPostService.getArticles(self.start).toPromise()
-        .then(function(data) {
+    this.subscription2 = self._articlesPostService.getArticles(self.start)
+        .subscribe(function(data) {
           if(data.status == "success") {
             for(let i in data.articles) {
               self.test.push(data.articles[i]);
             }
           }
         })
-        .catch(function(err) {
-          console.log(err)
-        })
   }
 
-  showToastr() {
+
+  read(idArticle) {
     var self = this;
-    this._dataService.valueToast
-      .subscribe(function(val) {
-        if(val == "success") {
-          self.toastr.success('Created article successfully')
-        }
-        else if(val == "fail") {
-          self.toastr.error('Created failed!')
-        }
-      })
+    this.router.navigate(['/postBlog', idArticle]);
   }
 
+  ngOnDestroy() {
+    if (this.subscription1) {
+      this.subscription1.unsubscribe();
+    }
+    if(this.subscription2) {
+      this.subscription2.unsubscribe();
+    }
+  }
 }

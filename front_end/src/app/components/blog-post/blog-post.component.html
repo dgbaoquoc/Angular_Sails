@@ -1,1 +1,52 @@
-<p>blog-post works!</p>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-8">
+
+      <h1 class="mt-4">{{postObject.articlename}}</h1>
+
+
+      <p class="lead">
+        by
+        <a href="#">{{postObject.id}}</a>
+      </p>
+
+      <hr>
+
+
+      <p>Posted on {{postObject.dateCreated}}</p>
+
+      <hr>
+
+
+      <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+
+      <hr>
+
+      <p class="lead" style="white-space: pre-line;">
+        {{postObject.article}}
+      </p>
+
+      <hr>
+
+
+
+    </div>
+
+
+    <div class="col-md-4">
+
+      <div class="card my-4">
+        <h5 class="card-header">Side Widget</h5>
+        <div class="card-body">
+          You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

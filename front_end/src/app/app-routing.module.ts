@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 // import { RegisterComponent } from './components/register/register.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
 import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component'
-
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
 
 
 const routes: Routes = [
@@ -32,12 +32,17 @@ const routes: Routes = [
   //   component: RegisterComponent
   // },
   {
-    path: '', component: BodyHomepageComponent
+    path: '', redirectTo: '/homepage', pathMatch: 'full'
   },
   {
-    path: 'haha', component: BlogPostComponent
+    path: 'homepage', component: BodyHomepageComponent
+  },
+  {
+    path: 'postBlog/:id', component: BlogPostComponent
+  },
+  {
+    path: '**', component: PageNotFoundComponent
   }
-
 ];
 
 @NgModule({
