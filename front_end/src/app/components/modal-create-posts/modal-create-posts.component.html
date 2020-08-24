@@ -8,15 +8,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <form class="form-signin" action="">
-          <div class="form-group">
-            <label for="articlename">Change The Article Name</label>
-            <input type="text" class="form-control" name="articlename" id="articlename" placeholder="Article Name">
-            <small class="form-text text-muted">You can change the article name.</small>
+        <form class="form-signin">
+          <div class="form-group" data-validate = "Articlename is required">
+            <label for="articlename">Article Name</label>
+            <input  [(ngModel)]="articleData.articlename" type="text" class="form-control" name="articlename" placeholder="Article Name" required autofocus>
+            <small class="form-text text-muted">Please share the article name.</small>
           </div>
-          <div class="form-group">
-            <label for="article">Change Your Article:</label>
-            <textarea class="form-control rounded-0" id="article" rows="10" placeholder="Write something" name="article" id="article"></textarea>
+          <div class="form-group" data-validate = "Article is required">
+            <label for="article">Your Article:</label>
+            <textarea [(ngModel)]="articleData.article" class="form-control rounded-0" id="article" rows="10" placeholder="Write something" name="article" id="article"></textarea>
           </div>
           <div class="form-group">
             <div class="input-group">
@@ -32,7 +32,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal" id="save">Save changes</button>
+            <button type="button" (click)="createArticle()"  data-dismiss="modal" class="btn btn-primary" id="submit">Submit</button>
           </div>
         </form>
       </div>

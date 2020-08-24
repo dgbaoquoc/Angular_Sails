@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { articles } from './articles-post';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,11 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class ArticlesPostService {
 
-  private url: string = "assets/data/articles.json"
+  private getArticle = "http://localhost:1337/showArticles"
   constructor(private http: HttpClient) {}
-  getArticles() : Observable<articles[]> {
-    return this.http.get<articles[]>(this.url);
-  }
 
+  getArticles(data: any) : Observable<any> {
+    // let parmam1 = new HttpParams();
+    // Object.keys(data).forEach(function(key) {
+    //   parmam1 = parmam1.append(key, data[key])
+    // })
+    return this.http.get<any>(this.getArticle, {params: data});
+  }
 
 }

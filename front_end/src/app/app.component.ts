@@ -8,6 +8,7 @@ import { Title, Meta} from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title = "";
 
   constructor(private titleService: Title, private meta: Meta) {
     titleService.setTitle("Blog Post - Start Bootstrap Template");

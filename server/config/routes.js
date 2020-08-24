@@ -19,9 +19,11 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': 'UserController.register',
+  '/signIn': 'UserController.register',
   'GET /register': 'UserController.register',
-  'POST /login': 'UserController.login'
+  'POST /login': 'UserController.login',
+  'POST /createArticle': 'UserController.postArticle',
+  'GET /showArticles': 'UserController.showArticles'
 
 
   /***************************************************************************
