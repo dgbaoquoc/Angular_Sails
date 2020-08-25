@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +28,9 @@ import { ArticlesComponent } from './components/articles/articles.component';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
 import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component';
 import { ArticleManagerComponent } from './components/article-manager/article-manager.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
+import { ResetpassComponent } from './components/resetpass/resetpass.component';
 
 
 @NgModule({
@@ -46,7 +50,10 @@ import { ArticleManagerComponent } from './components/article-manager/article-ma
     ModalCreatePostsComponent,
     BlogPostComponent,
     BodyHomepageComponent,
-    ArticleManagerComponent
+    ArticleManagerComponent,
+    NotfoundComponent,
+    ForgetpassComponent,
+    ResetpassComponent
   ],
   imports: [
     CommonModule,
@@ -54,8 +61,7 @@ import { ArticleManagerComponent } from './components/article-manager/article-ma
     ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-
-
+    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

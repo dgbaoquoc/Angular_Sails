@@ -8,12 +8,96 @@
 const jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 var moment = require('moment');
+var randomstring = require('randomstring');
+var nodemailer = require('nodemailer');
 
+var transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {        
+        user: 'casanovaa2205@gmail.com',
+        pass: 'coup1234'
+    }
+});
 module.exports = {
     test: (req, res) => {
         return res.json({status: 'succcccc'})
 
     },
+
+    forgot: (req, res) => {
+        let email = req.body.email
+        let resetCode = randomstring.generate();
+
+        return User.findOne({email})
+        .then(user => {
+            if(!user) {
+                return res.json({status: 'error', message: 'Email has not registerd!'})
+            }
+            return User.update(user.id, {token: resetCode})
+        })
+        .then(result => {
+            let origin = 'http://localhost:4200'
+
+            var url = origin + "/user/reset-password?email=" + encodeURIComponent(email) + "&token=" + resetCode;
+            sails.renderView('email/notify/forgot_password',
+                { email: email, url: url, layout: 'notify_template' }
+                , function (err, view) {
+                    if (err) {
+                        console.log('Create forgot password template  error');
+                        console.log(err);
+                    }
+                    var mailOptions = {
+                        from: 'casanovaa2205@gmail.com',
+                        to: email,
+                        subject: 'BTGenomics - Reset your password',
+                        html: view
+                    };
+
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log('Send mail error')
+                            console.log(email)
+                            console.log(error)
+                            console.log(mailOptions)
+                        } else {
+                            console.log('Send forgot password mail success.')
+                            console.log(email)
+                        }
+                    });
+                })
+
+                // sails.helpers.sendForgotPass(user.email, resetCode)
+                return res.json({status: 'success', message: 'Please check your inbox for an email we just sent you with instructions for how to reset your password and log into your account.'})
+        })
+    },
+
+    resetPassword: (req, res) => {
+        let token = req.body.token ? req.body.token : '';
+        let email = req.body.email ? req.body.email : '';
+        let password = req.body.newPassword ? req.body.newPassword : '';
+        
+        return User.findOne({email, token})
+        .then(user => {
+            if(!user) {
+                return false
+            }
+
+            return User.update(user.id, {password, token: ''}).fetch()
+        })
+        .then(result => {
+            if(result) {
+                return res.json({status: 'success', message: 'New password has updated successfully.'})
+            }
+            return res.json({status: 'error', message: 'Email or token is wrong'})
+        })
+        .catch(err => {
+            if(err) console.log(err)
+            return res.json({status: 'error', message: 'Unknown error.'})
+        })
+    },
+
     register: (req, res) => {
         let email = req.body.email
         let password = req.body.password
@@ -27,15 +111,13 @@ module.exports = {
         })
         .then(result => {
             if(result) {
-                let payload = { subject: result._id }
-                let token = jwt.sign(payload, 'secretKey')
-                return res.json({status: 'success', token})
+                return res.json({status: 'success', message: 'Your account has been registered successfully! '})
             }
-            return res.json({status: 'error', message: 'Email has created.'})
+            return res.json({status: 'error', message: 'Email has been used.'})
         })
         .catch(err => {
             if(err) console.log(err)
-            return res.json({status: 'error'})
+            return res.json({status: 'error', message: 'Unknown error.'})
         })
     },
 
@@ -46,7 +128,7 @@ module.exports = {
         return User.findOne({email})
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
-                let payload = { subject: user._id }
+                let payload = { subject: user._id, role: user.role }
                 let token = jwt.sign(payload, 'secretKey')
                 return res.json({status: 'success', token})
             }

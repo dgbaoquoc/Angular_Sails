@@ -21,15 +21,16 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
   //UserController
-  '/': 'UserController.register',
+  // '/': 'UserController.register',
   'POST /register': 'UserController.register',
   'POST /login': 'UserController.login',
+  'POST /forgot': 'UserController.forgot',
+  'POST /reset-password': 'UserController.resetPassword',
 
   '/test': 'UserController.test',
   'POST /createArticle': 'UserController.postArticle',
   'GET /showArticles': 'UserController.showArticles',
   'GET /register': 'UserController.register',
-  'POST /login': 'UserController.login',
   'GET /getuser': 'UserController.getUser',
   'POST /edituser': 'UserController.editUser',
 

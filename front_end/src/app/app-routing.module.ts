@@ -8,9 +8,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './guard/auth.guard';
+import { RoleGuardService } from './guard/role.guard';
 import { BlogPostComponent } from './components/blog-post/blog-post.component';
-import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component'
-
+import { BodyHomepageComponent } from './components/body-homepage/body-homepage.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
+import { ResetpassComponent } from './components/resetpass/resetpass.component';
 
 
 const routes: Routes = [
@@ -21,17 +24,26 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'events',
-    component: EventsComponent
-  },
-  {
     path: 'home',
     component: BodyHomepageComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'special',
-    component: SpecialEventsComponent
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'usermanager',
+      component: UserManagerComponent,
+      canActivate: [RoleGuardService], 
+      data: { 
+        expectedRole: 'admin'
+      } 
+    },
+    { path: 'articlemanager',
+      component: ArticleManagerComponent,
+      canActivate: [RoleGuardService], 
+      data: { 
+        expectedRole: 'admin'
+      } 
+    },
+    ]
+    
   },
   {
     path: 'login',
@@ -42,15 +54,20 @@ const routes: Routes = [
     component: RegisterComponent
   },
   {
-    path: 'haha', component: BlogPostComponent
+    path: 'forgot',
+    component: ForgetpassComponent
   },
-  { path: 'usermanager',
-    component: UserManagerComponent
+  {
+    path: 'user/reset-password',
+    component: ResetpassComponent
   },
-  { path: 'articlemanager',
-    component: ArticleManagerComponent
+  {
+    path: 'haha',
+    component: BlogPostComponent,
+    canActivate: [AuthGuard]
   },
 
+  {path: '**', component: NotfoundComponent},
 ];
 
 @NgModule({

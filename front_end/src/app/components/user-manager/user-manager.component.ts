@@ -56,32 +56,32 @@ export class UserManagerComponent implements OnInit {
     }
   });
 
-  $(document).on("click", ".edituser", function(id) {
-    ajax({
-        type: "POST",
-        dataType: "json",
-        url:"http://localhost:1337/edituser",
-        data:{
-            id:id,
-        },
-        success:function(data) {
-             var user = data.user
-            $("#myName").val(user.name)
-            $("#myRole").val(user.role)
-            $("#myStatus").val(user.status)
-            $("#myId").val(user.id)
-            if ( user.role == "Admin") {
-                $('#userRole').css('display','none');
-                $('#userStatus').css('display','none');
-            } else {
-                $('#userRole').css('display','block');
-                $('#userStatus').css('display','block');
-            }
+//   $(document).on("click", ".edituser", function(id) {
+//     ajax({
+//         type: "POST",
+//         dataType: "json",
+//         url:"http://localhost:1337/edituser",
+//         data:{
+//             id:id,
+//         },
+//         success:function(data) {
+//              var user = data.user
+//             $("#myName").val(user.name)
+//             $("#myRole").val(user.role)
+//             $("#myStatus").val(user.status)
+//             $("#myId").val(user.id)
+//             if ( user.role == "Admin") {
+//                 $('#userRole').css('display','none');
+//                 $('#userStatus').css('display','none');
+//             } else {
+//                 $('#userRole').css('display','block');
+//                 $('#userStatus').css('display','block');
+//             }
 
-        },
-    })
-    $("#userModal").modal("show")
-  })
+//         },
+//     })
+//     $("#userModal").modal("show")
+//   })
   }
 
 }

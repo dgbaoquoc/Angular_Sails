@@ -15,5 +15,11 @@ export class BodyHomepageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  checkLoggedUser() {
+    if(this._auth.loggedIn()) {
+      return true
+    } else {
+      return false
+    }
+  }
 }

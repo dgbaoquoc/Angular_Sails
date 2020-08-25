@@ -8,6 +8,8 @@
  * https://sailsjs.com/docs/concepts/policies
  */
 
+const { getUser } = require("../api/controllers/UserController");
+
 module.exports.policies = {
 
   /***************************************************************************
@@ -17,11 +19,11 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
+  '*': true,
+
 	UserController: {
-		'*': 'isAuthenticated',
-		login: true,
-    register: true,
-    test: ['isAuthenticated']
+    test: ['isAdmin'],
+    getUser: ['isAdmin'],
+    editUser: ['isAdmin'],
 	}
 };
