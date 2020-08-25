@@ -8,6 +8,8 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
+const Article = require("../api/models/Articles");
+
 module.exports.routes = {
 
   /***************************************************************************
@@ -18,14 +20,24 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
-  '/signIn': 'UserController.register',
-  'GET /register': 'UserController.register',
+  //UserController
+  // '/': 'UserController.register',
+  'POST /register': 'UserController.register',
   'POST /login': 'UserController.login',
+  'POST /forgot': 'UserController.forgot',
+  'POST /reset-password': 'UserController.resetPassword',
+
+  '/test': 'UserController.test',
   'POST /createArticle': 'UserController.postArticle',
   'GET /showArticles': 'UserController.showArticles',
-  'GET /getPost': 'UserController.getPost'
+  'GET /register': 'UserController.register',
+  'GET /getuser': 'UserController.getUser',
+  'POST /edituser': 'UserController.editUser',
+  'GET /getPost': 'UserController.getPost',
 
+
+  //ArticleController
+  'GET /getarticle': 'ArticleController.getArticle',
 
   /***************************************************************************
   *                                                                          *
