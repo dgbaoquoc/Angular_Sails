@@ -1,4 +1,4 @@
-import { Component, OnInit, Testability } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticlesPostService } from 'src/app/services/articles-post.service';
 import { SendDataService } from '../../services/send-data.service';
 import { Router } from '@angular/router';
