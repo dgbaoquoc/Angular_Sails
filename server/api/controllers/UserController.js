@@ -166,7 +166,6 @@ module.exports = {
   showArticles: function (req, res) {
     var start = req.query.startArticle;
     var search = req.query.searchArticle;
-    console.log(req.query);
     Articles.find({where: {articlename: {contains: search}}})
       .sort("id DESC")
       .limit(2)
@@ -243,5 +242,16 @@ module.exports = {
             .catch (err => {
                 console.log(err)
             })
-    }
+    },
+
+  getPost: function(req, res) {
+    var id = req.query.idPost;
+    Articles.findOne({id: id})
+      .then(function(data) {
+        return res.json({status: "success", post: data})
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+  }
 };

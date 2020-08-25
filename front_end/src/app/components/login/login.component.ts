@@ -40,11 +40,24 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
-        return;
+      return;
+    } else {
+      this._auth.loginUser(this.registerForm.value)
+        .subscribe(
+          res => {
+            if (res.status == 'success') {
+              localStorage.setItem('token', res.token)
+              this._toastr.success("Login successfully")
+              this._router.navigate(['/homepage'])
+            } else {
+              this._toastr.error(res.message)
+            }
+          },
+        )
     }
 
     // display form values on success
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
 }
 
   // loginUser() {

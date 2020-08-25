@@ -14,6 +14,7 @@ import { BodyHomepageComponent } from './components/body-homepage/body-homepage.
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'home',
+    path: 'homepage',
     component: BodyHomepageComponent,
     canActivate: [AuthGuard],
     children: [
@@ -68,6 +69,9 @@ const routes: Routes = [
   },
 
   {path: '**', component: NotfoundComponent},
+  {
+    path: 'postBlog/:id', component: BlogPostComponent
+  },
 ];
 
 @NgModule({

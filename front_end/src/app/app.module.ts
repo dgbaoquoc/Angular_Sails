@@ -31,6 +31,7 @@ import { ArticleManagerComponent } from './components/article-manager/article-ma
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ResetpassComponent } from './components/resetpass/resetpass.component';
     ArticleManagerComponent,
     NotfoundComponent,
     ForgetpassComponent,
-    ResetpassComponent
+    ResetpassComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     CommonModule,
