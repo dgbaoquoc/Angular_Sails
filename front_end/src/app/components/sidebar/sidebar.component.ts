@@ -10,7 +10,6 @@ declare var $: any;
 })
 export class SidebarComponent implements OnInit {
   @Output() searchEvent = new EventEmitter();
-  public test = [];
   constructor(private _articlesPostService: ArticlesPostService, private _dataService: SendDataService) { }
   start = {
     startArticle: 0,
@@ -23,15 +22,11 @@ export class SidebarComponent implements OnInit {
 
   searchArticles(value) {
     var self = this;
-    self.test.length = 0;
     self.start.searchArticle = value;
     self._articlesPostService.getArticles(self.start)
       .subscribe(function(data) {
         if(data.status == "success") {
-          for(let i in data.articles) {
-            self.test.push(data.articles[i]);
-          }
-          self.searchEvent.emit(self.test);
+          self.searchEvent.emit(data.articles);
         }
       })
   }
