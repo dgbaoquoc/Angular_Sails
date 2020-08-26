@@ -39,6 +39,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -82,7 +84,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatPaginatorModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    NgbModule
   ],
   providers: [AuthService, EventService, AuthGuard,
   {

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticlesPostService } from 'src/app/services/articles-post.service';
 import { SendDataService } from '../../services/send-data.service';
 declare var $: any;
@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  @Output() searchEvent = new EventEmitter();
+  public test = [];
   constructor(private _articlesPostService: ArticlesPostService, private _dataService: SendDataService) { }
   start = {
     startArticle: 0,
@@ -20,15 +20,10 @@ export class SidebarComponent implements OnInit {
     var self = this;
   }
 
-  searchArticles(value) {
+  searchArticles() {
     var self = this;
-    self.start.searchArticle = value;
-    self._articlesPostService.getArticles(self.start)
-      .subscribe(function(data) {
-        if(data.status == "success") {
-          self.searchEvent.emit(data.articles);
-        }
-      })
+    this.search = $("#articleName").val() ? $("#articleName").val() : "";
+    this._dataService.sendValue(self.search);
   }
 
 }
