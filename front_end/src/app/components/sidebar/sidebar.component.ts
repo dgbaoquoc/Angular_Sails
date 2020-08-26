@@ -23,6 +23,7 @@ export class SidebarComponent implements OnInit {
 
   searchArticles(value) {
     var self = this;
+    self.test.length = 0;
     self.start.searchArticle = value;
     self._articlesPostService.getArticles(self.start)
       .subscribe(function(data) {

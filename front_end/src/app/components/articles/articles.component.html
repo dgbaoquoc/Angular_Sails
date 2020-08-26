@@ -2,16 +2,16 @@
 
 <hr>
 
-<div class="card mb-4" *ngFor="let x of test">
+<div class="card mb-4">
   <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
   <div class="card-body">
-    <h2 class="card-title">{{x.articlename}}</h2>
-    <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="test">{{x.article}}</p>
-    <a class="btn btn-primary" (click)="read(x.id)">Read More &rarr;</a>
+    <h2 class="card-title">{{test.articlename}}</h2>
+    <p class="card-text" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" id="test">{{test.article}}</p>
+    <a class="btn btn-primary" (click)="read(test.id)">Read More &rarr;</a>
   </div>
   <div class="card-footer text-muted">
-    Posted on {{x.dateCreated}} by
-    <a href="">{{x.author}}</a>
+    Posted on {{test.dateCreated}} by
+    <a href="">{{test.author}}</a>
   </div>
 </div>
 
