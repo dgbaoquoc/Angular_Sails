@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../auth.service';
-import { Article } from '../../models/Article'
+import { Article } from '../../models/Article';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 declare var $:any
 
@@ -10,42 +13,27 @@ declare var $:any
   styleUrls: ['./article-manager.component.css']
 })
 export class ArticleManagerComponent implements OnInit {
-  article: Article[];
+    ELEMENT_DATA: Article[];
+    displayedColumns:string[] = ['id', 'title', 'author', 'date', 'description', 'content', 'actions'];
+    dataSource = new MatTableDataSource<Article>(this.ELEMENT_DATA)
+
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private _AuthService: AuthService) { }
 
   ngOnInit(): void {
-    $ (document).ready( function() {
-      $('#example').DataTable( {
-          "processing": true,
-          "serverSide": true,
-          "ajax": {
-              "order": [[ 0, 'ASC' ]],
-              "url":"http://localhost:1337/getarticle",
-              "type":"GET",
-              "cache":true,
-              "complete":function(xhr, stt ) {
-                  console.log(xhr.responseText);
-                  console.log(status)
-              },
-          },
-          columns:  [
-              {    name: "id",
-                  render:$.fn.dataTable.render.text()
-          },
-              {   name: "title",
-                  render:$.fn.dataTable.render.text()
-          },
-              {   name: "author",
-                  render:$.fn.dataTable.render.text()
-          },
-              {   name: "date",
-                  render:$.fn.dataTable.render.text()
-          },
-              { name: null, "orderable":false },
-          ],
-      })
-  })
+    this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.getAllArticles();  
   }
 
+    getAllArticles(){
+    let resp = this._AuthService.getArticle();
+    resp.subscribe(report => this.dataSource.data=report as Article[])
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
 }

@@ -18,4 +18,11 @@ export class AuthService {
     return this.http.post<any>(this._loginUrl, user)
   }
   
+  getUser() {
+    return this.http.get("http://localhost:1337/getuser")
+  }
+
+  getArticle() {
+    return this.http.get("http://localhost:1337/getarticle")
+  }
 }

@@ -23,48 +23,10 @@ module.exports = {
 
     getUser: (req, res) => {
         var arrayUser = [];
-        var orderColumn = req.query.order[0].column;
-        var nameColumn = req.query.columns[orderColumn].name;      
-        var dir
 
-        if (req.query.order[0].dir == 'asc') {
-            dir = 'ASC'
-        } else {
-            dir = 'DESC'
-        }
-        var b = {};
-        b[nameColumn] = dir;
-
-        var total
-
-        User.count({})
-            .then((data1) => {
-                total = data1
-                return User.find({where:{or: [{email: { contains: req.query.search.value }}, {first_name: { contains: req.query.search.value }}, {last_name: { contains: req.query.search.value } }]}}).skip(Number(req.query.start)).limit(Number(req.query.length)).sort([b]);
-            })
+        User.find({})
             .then((userData) => {   
-                userData.forEach(element => {
-                    var loginTime = moment(element.lastlogin).format('DD/MM/YYYY HH:mm:ss')
-                    let view = `<button id="element.id" onClick="viewUser(${element.id})" class="btn btn-success">View</button>`
-                    let edit = `<button id="element.id" style="margin-left:5px" onClick="editUser(${element.id})" class=" edituser btn btn-primary">Edit</button>`
-                    let deleteButton = `<button id="element.id" style="margin-left:5px" onClick="deleteUser(${element.id})" class="btn btn-danger">Delete</button>`
-                    var button  
-                    // if (element.role == "Admin") {
-                    //     button = view + "" +  edit
-                    // } else {
-                        button = view + edit + deleteButton
-                    //}
-                    arrayUser.push([element.id, element.email, element.first_name, element.last_name, button])
-                })
-                return User.find({where:{or: [{email: { contains: req.query.search.value } }, {first_name: { contains: req.query.search.value } }, { last_name: { contains: req.query.search.value } } ]}})
-            })
-            .then((data2) => {
-                return res.json({
-                    "draw": req.query.draw,
-                    "recordsTotal": total,
-                    "recordsFiltered": data2.length,
-                    "data": arrayUser
-                })
+                return res.json(userData)
             })
             .catch( (err) => {
                 if (err) {
@@ -75,6 +37,7 @@ module.exports = {
     },
     
     editUser: (req, res) => {
+        console.log("hello")
         let id = req.param("id");
         console.log(id)
         User.findOne({id:id})
