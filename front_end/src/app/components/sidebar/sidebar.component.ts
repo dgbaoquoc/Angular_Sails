@@ -20,8 +20,15 @@ export class SidebarComponent implements OnInit {
     var self = this;
   }
 
-  searchArticles() {
+  searchArticles(value) {
     var self = this;
+    self.start.searchArticle = value;
+    self._articlesPostService.getArticles(self.start)
+      .subscribe(function(data) {
+        if(data.status == "success") {
+          
+        }
+      })
     this.search = $("#articleName").val() ? $("#articleName").val() : "";
     this._dataService.sendValue(self.search);
   }
