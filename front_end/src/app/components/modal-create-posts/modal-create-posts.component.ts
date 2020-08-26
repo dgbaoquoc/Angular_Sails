@@ -24,6 +24,7 @@ export class ModalCreatePostsComponent implements OnInit {
     var self = this;
     this._createPostsService.postArticle(this.articleData).toPromise()
       .then(function(res) {
+        console.log(res.status)
         if(res.status == "success") {
           self.toastr.success('Created article successfully')
         }

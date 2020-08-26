@@ -31,20 +31,20 @@ const routes: Routes = [
     children: [
       { path: 'usermanager',
       component: UserManagerComponent,
-      canActivate: [RoleGuardService], 
-      data: { 
+      canActivate: [RoleGuardService],
+      data: {
         expectedRole: 'admin'
-      } 
+      }
     },
     { path: 'articlemanager',
       component: ArticleManagerComponent,
-      canActivate: [RoleGuardService], 
-      data: { 
+      canActivate: [RoleGuardService],
+      data: {
         expectedRole: 'admin'
-      } 
+      }
     },
     ]
-    
+
   },
   {
     path: 'login',
@@ -63,15 +63,12 @@ const routes: Routes = [
     component: ResetpassComponent
   },
   {
-    path: 'haha',
+    path: 'postBlog/:id',
     component: BlogPostComponent,
     canActivate: [AuthGuard]
   },
 
-  {path: '**', component: NotfoundComponent},
-  {
-    path: 'postBlog/:id', component: BlogPostComponent
-  },
+  {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({

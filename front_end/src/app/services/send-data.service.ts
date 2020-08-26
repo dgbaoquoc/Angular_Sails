@@ -8,7 +8,7 @@ export class SendDataService {
 
   constructor() { }
 
-  private valueData: BehaviorSubject<any> = new BehaviorSubject<any>('');
+  private valueData: BehaviorSubject<any> = new BehaviorSubject<any>("");
   valueFromSearch$: Observable<any> = this.valueData.asObservable();
 
   sendValue(data: any) {

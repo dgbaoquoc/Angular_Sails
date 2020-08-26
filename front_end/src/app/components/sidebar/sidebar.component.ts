@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
 
   searchArticles() {
     var self = this;
-    this.search = $("#articleName") ? $("#articleName").val() : "";
+    this.search = $("#articleName").val() ? $("#articleName").val() : "";
     this._dataService.sendValue(self.search);
   }
 

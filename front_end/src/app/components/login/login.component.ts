@@ -12,7 +12,7 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  
+
   // loginUserData = {
   //   email: '',
   //   password: ''
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this._auth.loggedIn()) {
-      this._router.navigate(['home']);
+      this._router.navigate(['homepage']);
     }
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       // confirmPassword: ['', Validators.required],
     });
   }
-  
+
   get f() { return this.registerForm.controls; }
 
   onSubmit() {

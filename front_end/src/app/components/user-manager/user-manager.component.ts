@@ -11,7 +11,7 @@ declare  var $:  any;
 export class UserManagerComponent implements OnInit {
    user: User[];
 
-  constructor(private _AuthService: AuthService) { 
+  constructor(private _AuthService: AuthService) {
   }
 
     clickFunction() {
@@ -19,10 +19,11 @@ export class UserManagerComponent implements OnInit {
     }
     updateUser() {
         alert("hello world");
-    } 
+    }
 
 
   ngOnInit() {
+    console.log(1);
     $(document).ready(function() {
       $('#example').DataTable( {
           "processing": true,

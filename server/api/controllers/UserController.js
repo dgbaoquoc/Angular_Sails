@@ -15,7 +15,7 @@ var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
     secure: true,
-    auth: {        
+    auth: {
         user: 'casanovaa2205@gmail.com',
         pass: 'coup1234'
     }
@@ -77,7 +77,7 @@ module.exports = {
         let token = req.body.token ? req.body.token : '';
         let email = req.body.email ? req.body.email : '';
         let password = req.body.newPassword ? req.body.newPassword : '';
-        
+
         return User.findOne({email, token})
         .then(user => {
             if(!user) {
@@ -101,7 +101,7 @@ module.exports = {
     register: (req, res) => {
         let email = req.body.email
         let password = req.body.password
-        
+
         return User.findOne({email})
         .then(user => {
             if(user) {
@@ -124,7 +124,7 @@ module.exports = {
     login: (req, res) => {
         let email = req.body.email
         let password = req.body.password
-        
+
         return User.findOne({email})
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
@@ -142,7 +142,9 @@ module.exports = {
 
   postArticle: function (req, res) {
     var articlename = req.param("articlename");
+    console.log(articlename);
     var article = req.param("article");
+    console.log(article)
     var dateCreated = String(moment().format("MMM DD YY"));
     if(articlename == "" || article == "") {
       return res.json({status: "fail"});
@@ -157,8 +159,8 @@ module.exports = {
           return res.json({ status: "success" });
         })
         .catch(function (err) {
-          return res.json({status: "fail"})
           console.log(err);
+          return res.json({status: "fail"})
         });
     }
   },
@@ -180,7 +182,7 @@ module.exports = {
     getUser: (req, res) => {
         var arrayUser = [];
         var orderColumn = req.query.order[0].column;
-        var nameColumn = req.query.columns[orderColumn].name;      
+        var nameColumn = req.query.columns[orderColumn].name;
         var dir
 
         if (req.query.order[0].dir == 'asc') {
@@ -198,13 +200,13 @@ module.exports = {
                 total = data1
                 return User.find({where:{or: [{email: { contains: req.query.search.value }}, {first_name: { contains: req.query.search.value }}, {last_name: { contains: req.query.search.value } }]}}).skip(Number(req.query.start)).limit(Number(req.query.length)).sort([b]);
             })
-            .then((userData) => {   
+            .then((userData) => {
                 userData.forEach(element => {
                     var loginTime = moment(element.lastlogin).format('DD/MM/YYYY HH:mm:ss')
                     let view = `<button id="element.id" onClick="viewUser(${element.id})" class="btn btn-success">View</button>`
                     let edit = `<button id="element.id" style="margin-left:5px" onClick="editUser(${element.id})" class=" edituser btn btn-primary">Edit</button>`
                     let deleteButton = `<button id="element.id" style="margin-left:5px" onClick="deleteUser(${element.id})" class="btn btn-danger">Delete</button>`
-                    var button  
+                    var button
                     // if (element.role == "Admin") {
                     //     button = view + "" +  edit
                     // } else {
@@ -227,9 +229,9 @@ module.exports = {
                     console.log(err)
                 }
             })
-                
+
     },
-    
+
     editUser: (req, res) => {
         let id = req.param("id");
         console.log(id)
