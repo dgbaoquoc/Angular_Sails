@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this._auth.loggedIn()) {
-      this._router.navigate(['home']);
+      this._router.navigate(['/homepage']);
     }
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

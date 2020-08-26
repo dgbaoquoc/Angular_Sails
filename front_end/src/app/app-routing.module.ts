@@ -14,7 +14,9 @@ import { BodyHomepageComponent } from './components/body-homepage/body-homepage.
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { QuocariclesComponent } from './components/quocaricles/quocaricles.component';
+import { PostdetailComponent } from './components/postdetail/postdetail.component';
 
 
 const routes: Routes = [
@@ -26,25 +28,8 @@ const routes: Routes = [
   },
   {
     path: 'homepage',
-    component: BodyHomepageComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: 'usermanager',
-      component: UserManagerComponent,
-      canActivate: [RoleGuardService], 
-      data: { 
-        expectedRole: 'admin'
-      } 
-    },
-    { path: 'articlemanager',
-      component: ArticleManagerComponent,
-      canActivate: [RoleGuardService], 
-      data: { 
-        expectedRole: 'admin'
-      } 
-    },
-    ]
-    
+    component: QuocariclesComponent,
+    canActivate: [AuthGuard],    
   },
   {
     path: 'login',
@@ -67,11 +52,31 @@ const routes: Routes = [
     component: BlogPostComponent,
     canActivate: [AuthGuard]
   },
-
-  {path: '**', component: NotfoundComponent},
+  {
+    path: 'usermanager',
+    component: UserManagerComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'admin'
+    }
+  },
+  {
+    path: 'articlemanager',
+    component: ArticleManagerComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: 'admin'
+    }
+  },
   {
     path: 'postBlog/:id', component: BlogPostComponent
   },
+  {
+    path: 'posts/:id',
+    component: PostdetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: '**', component: NotfoundComponent},
 ];
 
 @NgModule({

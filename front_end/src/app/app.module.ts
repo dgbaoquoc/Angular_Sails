@@ -32,6 +32,9 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { QuocariclesComponent } from './components/quocaricles/quocaricles.component';
+import { PostdetailComponent } from './components/postdetail/postdetail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -56,6 +59,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ForgetpassComponent,
     ResetpassComponent,
     PageNotFoundComponent,
+    QuocariclesComponent,
+    PostdetailComponent,
   ],
   imports: [
     CommonModule,
@@ -68,8 +73,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgbModule,
   ],
-  providers: [AuthService, EventService, AuthGuard,
+  providers: [AuthService, EventService, AuthGuard, ArticlesComponent,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

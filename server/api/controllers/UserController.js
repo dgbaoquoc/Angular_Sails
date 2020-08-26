@@ -26,6 +26,32 @@ module.exports = {
 
     },
 
+    getCurrentUser:(req, res) => {
+        let token = req.headers.authorization.split(' ')[1]
+        return new Promise((resolve, reject) => {
+            jwt.verify(token, 'secretKey', function (err, decoded) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(decoded.id);
+                }
+            });
+        })
+        .then(id => {
+            return User.findOne(id)
+        })
+        .then(user => {
+            if(!user) {
+                return res.json({status: 'error', user: ''})
+            }
+            return res.json({status: 'success', user})
+        })
+        .catch(err => {
+            if(err) console.log(err)
+            return res.json({status: 'error', message: 'Unknown error.'})
+        })
+    },
+
     forgot: (req, res) => {
         let email = req.body.email
         let resetCode = randomstring.generate();
@@ -70,6 +96,10 @@ module.exports = {
 
                 // sails.helpers.sendForgotPass(user.email, resetCode)
                 return res.json({status: 'success', message: 'Please check your inbox for an email we just sent you with instructions for how to reset your password and log into your account.'})
+        })
+        .catch(err => {
+            if(err) console.log(err)
+            return res.json({status: 'error', message: 'Unknown error.'})
         })
     },
 
@@ -128,7 +158,7 @@ module.exports = {
         return User.findOne({email})
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
-                let payload = { subject: user._id, role: user.role }
+                let payload = { subject: user._id, role: user.role, email: user.email, id: user.id }
                 let token = jwt.sign(payload, 'secretKey')
                 return res.json({status: 'success', token})
             }

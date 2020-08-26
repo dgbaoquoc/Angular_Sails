@@ -8,7 +8,6 @@
  * https://sailsjs.com/docs/concepts/policies
  */
 
-const { getUser } = require("../api/controllers/UserController");
 
 module.exports.policies = {
 

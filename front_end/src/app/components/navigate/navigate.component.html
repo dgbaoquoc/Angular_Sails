@@ -7,14 +7,35 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/homepage">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" *ngIf="checkLoggedUser()" (click)="logOutUser()" >Log Out</a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" *ngIf="checkLoggedUser()" (click)="test()" >Test</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/usermanager" >User Manager</a>
+        </li>
+        <li ngbDropdown class="d-inline-block text-right">
+          <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>User Info</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a ngbDropdownItem class="dropdown-item" >{{user.email}}</a>
+            <a ngbDropdownItem class="dropdown-item" >{{user.role}}</a>
+            <a ngbDropdownItem class="dropdown-item" *ngIf="checkLoggedUser()" (click)="logOutUser()" >Log Out</a>
+          </div>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            User Info
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">{{user.email}}</a>
+            <a class="dropdown-item" href="#">{{user.role}}</a>
+            <a class="dropdown-item" *ngIf="checkLoggedUser()" (click)="logOutUser()" >Log Out</a>
+          </div>
+        </li> -->
       </ul>
       
     </div>

@@ -16,5 +16,11 @@ export class AppComponent {
     meta.addTag({name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no"});
   }
 
-
+  checkLoggedUser() {
+    if(this._auth.loggedIn()) {
+      return true
+    } else {
+      return false
+    }
+  }
 }

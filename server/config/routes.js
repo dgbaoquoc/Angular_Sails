@@ -26,6 +26,8 @@ module.exports.routes = {
   'POST /login': 'UserController.login',
   'POST /forgot': 'UserController.forgot',
   'POST /reset-password': 'UserController.resetPassword',
+  'GET /getCurrentUser': 'UserController.getCurrentUser',
+
 
   '/test': 'UserController.test',
   'POST /createArticle': 'UserController.postArticle',
@@ -38,6 +40,9 @@ module.exports.routes = {
 
   //ArticleController
   'GET /getarticle': 'ArticleController.getArticle',
+  'GET /getPosts': 'PostsController.getPosts',
+  'GET /posts/:id': 'PostsController.getDetailArticle',
+  'POST /getSearchedPosts': 'PostsController.getSearchedPosts'
 
   /***************************************************************************
   *                                                                          *
