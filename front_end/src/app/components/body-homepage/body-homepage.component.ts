@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
+import { ArticlesPostService } from 'src/app/services/articles-post.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,18 +9,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./body-homepage.component.css']
 })
 export class BodyHomepageComponent implements OnInit {
-
+  public test = [];
+  start = {
+    startArticle: 0,
+    searchArticle: ""
+  }
   constructor(private _auth:AuthService,
-    private _router:Router) { }
+    private _router:Router, private _articlesPostService: ArticlesPostService) { }
 
   ngOnInit(): void {
+    var self = this;
+    self._articlesPostService.getArticles(self.start)
+      .subscribe(function(data) {
+        if(data.status == "success") {
+          for(let i in data.articles) {
+            self.test.push(data.articles[i]);
+          }
+        }
+      })
   }
 
-  checkLoggedUser() {
-    if(this._auth.loggedIn()) {
-      return true
-    } else {
-      return false
-    }
+  submitSearch(value) {
+    this.test = value;
   }
+
+
 }

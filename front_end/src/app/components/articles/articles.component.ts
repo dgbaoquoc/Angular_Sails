@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ArticlesPostService } from 'src/app/services/articles-post.service';
 import { SendDataService } from '../../services/send-data.service';
 import { Router } from '@angular/router';
@@ -11,9 +11,10 @@ declare var $: any;
   styleUrls: ['./articles.component.css']
 })
 export class ArticlesComponent implements OnInit {
+  @Input() test: any;
   subscription1: Subscription;
   subscription2: Subscription;
-  public test = [];
+//  public test = [];
   constructor(private _articlesPostService: ArticlesPostService, private _dataService: SendDataService, private router: Router) { }
   start = {
     startArticle: 0,
@@ -22,37 +23,37 @@ export class ArticlesComponent implements OnInit {
 
 
   ngOnInit() {
-    var self = this;
-    var x = 500;
-    this.subscription1 = this._dataService.valueFromSearch$
-      .subscribe(function(chris) {
-        self.test.length = 0;
-        self.start.startArticle = 0;
-        self.start.searchArticle = chris;
-        self.takeArticles();
-        x = 500;
-      })
-    $(window).scroll(function(){
-        var y = $(window).scrollTop();
-        if(y >= x) {
-            self.start.startArticle += 2;
-            self.takeArticles();
-            x += 500;
-        }
-    });
+    // var self = this;
+    // var x = 500;
+    // this.subscription1 = this._dataService.valueFromSearch$
+    //   .subscribe(function(chris) {
+    //     self.test.length = 0;
+    //     self.start.startArticle = 0;
+    //     self.start.searchArticle = chris;
+    //     self.takeArticles();
+    //     x = 500;
+    //   })
+    // $(window).scroll(function(){
+    //     var y = $(window).scrollTop();
+    //     if(y >= x) {
+    //         self.start.startArticle += 2;
+    //         self.takeArticles();
+    //         x += 500;
+    //     }
+    // });
   }
 
-  takeArticles() {
-    var self = this;
-    this.subscription2 = self._articlesPostService.getArticles(self.start)
-        .subscribe(function(data) {
-          if(data.status == "success") {
-            for(let i in data.articles) {
-              self.test.push(data.articles[i]);
-            }
-          }
-        })
-  }
+  // takeArticles() {
+  //   var self = this;
+  //   this.subscription2 = self._articlesPostService.getArticles(self.start)
+  //       .subscribe(function(data) {
+  //         if(data.status == "success") {
+  //           for(let i in data.articles) {
+  //             self.test.push(data.articles[i]);
+  //           }
+  //         }
+  //       })
+  // }
 
 
   read(idArticle) {
