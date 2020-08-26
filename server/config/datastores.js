@@ -34,7 +34,7 @@ module.exports.datastores = {
 
   default: {
     adapter: 'sails-mongo',
-    url: 'mongodb://root@localhost:27017/angular_sails'
+    url: 'mongodb://root@localhost:27019/angular'
 
     /***************************************************************************
     *                                                                          *

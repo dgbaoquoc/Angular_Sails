@@ -5,6 +5,8 @@
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
  */
 
+var bcrypt = require('bcryptjs');
+
 module.exports = {
 
   attributes: {
@@ -17,14 +19,21 @@ module.exports = {
       type: 'string',
       required: true
     },
-    first_name: {
+    role: {
       type: 'string',
-      required: true
+      // required: true
     },
-    last_name: {
+    token: {
       type: 'string',
-      required: true
     },
+    // first_name: {
+    //   type: 'string',
+    //   required: true
+    // },
+    // last_name: {
+    //   type: 'string',
+    //   required: true
+    // },
     createdAt: {
       type: 'ref',
       columnType: 'datetime',
@@ -37,6 +46,38 @@ module.exports = {
     },
 
   },
+
+
+  beforeCreate: function (user, callback) {
+		bcrypt.genSalt(10, function (error, salt) {
+			bcrypt.hash(user.password, salt, function (error, hash) {
+				if (error) {
+					callback(error);
+				} else {
+					user.password = hash;
+					callback(null, user);
+				}
+			});
+		});
+	},
+
+	beforeUpdate: function (user, callback) {
+    	// Only when new password is sent
+    	if (user.password) {
+			bcrypt.genSalt(10, function (error, salt) {
+				bcrypt.hash(user.password, salt, function (error, hash) {
+					if (error) {
+						callback(error);
+					} else {
+						user.password = hash;
+						callback(null, user);
+					}
+				});
+			});
+		} else {
+    		callback(null, user);
+		}
+	}
 
 };
 

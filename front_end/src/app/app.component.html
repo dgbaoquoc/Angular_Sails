@@ -1,1 +1,5 @@
+<app-navigate *ngIf="checkLoggedUser()"></app-navigate>
 <router-outlet></router-outlet>
+<app-footer *ngIf="checkLoggedUser()"></app-footer>
+
+

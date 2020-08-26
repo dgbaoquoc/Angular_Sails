@@ -1,0 +1,42 @@
+<div class="container">
+
+    <div class="row">
+  
+  
+      <div *ngIf="articles.length" class="col-lg-8">
+        <app-articles
+            *ngFor="let article of articles"
+            [article]="article"
+        ></app-articles>
+      </div>
+      
+      <div *ngIf="!articles.length" class="col-lg-8">No article found</div>
+  
+      <div class="col-md-4">
+        <app-sidebar (searchEvent)="submitSearch($event)"></app-sidebar>
+        <!-- <div class="card my-4">
+            <h5 class="card-header">Search</h5>
+            <div class="card-body">
+              <form action="" class="input-group search">
+                <input type="text" class="form-control" placeholder="Search for article name..." value="" id="articleName"
+                (keydown.enter)="submitSearch($event.target.value)" />
+          
+              </form>
+            </div>
+          </div>
+          
+          <div class="card my-4">
+            <h5 class="card-header">About web:</h5>
+            <div class="card-body">
+              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            </div>
+          </div> -->
+          
+      </div>
+  
+    </div>
+  
+  </div>
+  <div class="overlay">
+    <div id="loading-img"></div>
+</div>

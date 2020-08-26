@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-register',
@@ -13,7 +16,9 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  constructor(private _auth:AuthService) { }
+  constructor(private _auth:AuthService,
+              private _toastr: ToastrService,
+              private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +26,14 @@ export class RegisterComponent implements OnInit {
   registerUser() {
     this._auth.registerUser(this.registerUserData)
     .subscribe(
-      res => console.log(res),
-      err => console.log(err)
+      res => {
+        if(res.status == 'success') {
+          this._toastr.success(res.message)
+          this._router.navigate(['/login']);
+        } else {
+          this._toastr.error(res.message)
+        }
+      },
     )
   }
 
