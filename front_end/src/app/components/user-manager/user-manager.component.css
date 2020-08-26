@@ -6,3 +6,11 @@ th.mat-sort-header-sorted {
     color: black;
 };
 
+.mat-column-actions {
+    padding-top: 18px;
+    justify-content: center;
+}
+
+.mat-header-row {
+    background-color: #2c99c2;
+}
