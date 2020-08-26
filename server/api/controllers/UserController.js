@@ -10,6 +10,7 @@ var bcrypt = require('bcryptjs');
 var moment = require('moment');
 var randomstring = require('randomstring');
 var nodemailer = require('nodemailer');
+var jwtDecode = require('jwt-decode');
 
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -128,7 +129,7 @@ module.exports = {
         return User.findOne({email})
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
-                let payload = { subject: user._id, role: user.role }
+                let payload = { subject: user._id, role: user.role, email: user.email }
                 let token = jwt.sign(payload, 'secretKey')
                 return res.json({status: 'success', token})
             }
@@ -142,10 +143,11 @@ module.exports = {
 
   postArticle: function (req, res) {
     var articlename = req.param("articlename");
-    console.log(articlename);
     var article = req.param("article");
-    console.log(article)
     var dateCreated = String(moment().format("MMM DD YY"));
+    var token = req.headers.authorization.split(' ')[1];
+    var decoded = jwtDecode(token);
+    var author = decoded.email;
     if(articlename == "" || article == "") {
       return res.json({status: "fail"});
     }
@@ -154,6 +156,7 @@ module.exports = {
         articlename: articlename,
         article: article,
         dateCreated: dateCreated,
+        author: author
       })
         .then(function (data) {
           return res.json({ status: "success" });
@@ -166,19 +169,56 @@ module.exports = {
   },
 
   showArticles: function (req, res) {
+    var token = req.headers.authorization.split(' ')[1];
+    var decoded = jwtDecode(token);
+    var email = decoded.email;
     var start = req.query.startArticle;
     var search = req.query.searchArticle;
-    Articles.find({where: {articlename: {contains: search}}})
-      .sort("id DESC")
-      .limit(2)
-      .skip(start)
-      .then(function (data) {
-        res.json({ status: "success", articles: data });
+    User.findOne({email: email})
+      .then(function(data0) {
+        if(data0.role == "admin") {
+          Articles.find({where: {articlename: {contains: search}}})
+            .sort("id DESC")
+            .limit(2)
+            .skip(start)
+            .then(function (data) {
+              res.json({ status: "success", articles: data });
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+        }
+        else {
+          Articles.find({where: {articlename: {contains: search}, author: email}})
+            .sort("id DESC")
+            .limit(2)
+            .skip(start)
+            .then(function (data) {
+              res.json({ status: "success", articles: data });
+            })
+            .catch(function (err) {
+              console.log(err);
+            });
+        }
       })
-      .catch(function (err) {
-        console.log(err);
-      });
   },
+
+  getPost: function(req, res) {
+    var id = req.query.idPost;
+    Articles.findOne({id: id})
+      .then(function(data) {
+        return res.json({status: "success", post: data})
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+  },
+
+  showArticlesTest: function(req, res) {
+    console.log(1);
+    console.log(req.query);
+  },
+
     getUser: (req, res) => {
         var arrayUser = [];
         var orderColumn = req.query.order[0].column;
@@ -246,14 +286,5 @@ module.exports = {
             })
     },
 
-  getPost: function(req, res) {
-    var id = req.query.idPost;
-    Articles.findOne({id: id})
-      .then(function(data) {
-        return res.json({status: "success", post: data})
-      })
-      .catch(function(err) {
-        console.log(err)
-      })
-  }
+
 };

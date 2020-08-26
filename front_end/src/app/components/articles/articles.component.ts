@@ -19,6 +19,8 @@ export class ArticlesComponent implements OnInit {
     startArticle: 0,
     searchArticle: ""
   }
+
+
   ngOnInit() {
     var self = this;
     var x = 500;
@@ -35,7 +37,7 @@ export class ArticlesComponent implements OnInit {
         if(y >= x) {
             self.start.startArticle += 2;
             self.takeArticles();
-            x += y;
+            x += 500;
         }
     });
   }
@@ -66,4 +68,7 @@ export class ArticlesComponent implements OnInit {
       this.subscription2.unsubscribe();
     }
   }
+
+
 }
+

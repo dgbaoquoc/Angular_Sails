@@ -13,13 +13,12 @@ module.exports = function(req, res, next) {
     if(!req.headers.authorization) {
         return res.status(401).send('Unauthorized request')
     }
-    
+
     let token = req.headers.authorization.split(' ')[1]
     jwt.verify(token, 'secretKey', function(err, decoded) {
         if(err) {
             return res.status(401).send('Unauthorized request')
         }
-        // console.log(decoded.role)
 
         if (decoded.role == 'admin') {
             return next();

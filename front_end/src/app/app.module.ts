@@ -32,6 +32,14 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ArticleManagerTestComponent } from './components/article-manager-test/article-manager-test.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+
 
 
 @NgModule({
@@ -56,6 +64,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ForgetpassComponent,
     ResetpassComponent,
     PageNotFoundComponent,
+    ArticleManagerTestComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +77,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatIconModule
   ],
   providers: [AuthService, EventService, AuthGuard,
   {

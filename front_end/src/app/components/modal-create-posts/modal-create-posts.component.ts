@@ -12,7 +12,7 @@ declare var $: any;
 export class ModalCreatePostsComponent implements OnInit {
   articleData={
     articlename: '',
-    article: ''
+    article: '',
   }
   constructor(private _createPostsService: CreatePostsService, private _dataService: SendDataService, private toastr: ToastrService) { }
 
@@ -26,7 +26,9 @@ export class ModalCreatePostsComponent implements OnInit {
       .then(function(res) {
         console.log(res.status)
         if(res.status == "success") {
-          self.toastr.success('Created article successfully')
+          self.refresh();
+          self.toastr.success('Created article successfully');
+
         }
         else if(res.status == "fail") {
           self.toastr.error('Created failed!')
@@ -35,6 +37,10 @@ export class ModalCreatePostsComponent implements OnInit {
       .catch(function(err) {
         console.log(err);
       })
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 
 }

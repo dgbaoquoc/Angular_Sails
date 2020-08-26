@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+    var self = this;
     this.submitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {

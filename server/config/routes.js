@@ -34,6 +34,7 @@ module.exports.routes = {
   'GET /getuser': 'UserController.getUser',
   'POST /edituser': 'UserController.editUser',
   'GET /getPost': 'UserController.getPost',
+  'GET /showArticlesTest': 'UserController.showArticlesTest',
 
 
   //ArticleController

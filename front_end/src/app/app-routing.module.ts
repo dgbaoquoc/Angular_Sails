@@ -14,7 +14,8 @@ import { BodyHomepageComponent } from './components/body-homepage/body-homepage.
 import { NotfoundComponent } from './notfound/notfound.component';
 import { ForgetpassComponent } from './components/forgetpass/forgetpass.component';
 import { ResetpassComponent } from './components/resetpass/resetpass.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ArticleManagerTestComponent } from './components/article-manager-test/article-manager-test.component'
 
 
 const routes: Routes = [
@@ -28,22 +29,22 @@ const routes: Routes = [
     path: 'homepage',
     component: BodyHomepageComponent,
     canActivate: [AuthGuard],
-    children: [
-      { path: 'usermanager',
-      component: UserManagerComponent,
-      canActivate: [RoleGuardService],
-      data: {
-        expectedRole: 'admin'
-      }
-    },
-    { path: 'articlemanager',
-      component: ArticleManagerComponent,
-      canActivate: [RoleGuardService],
-      data: {
-        expectedRole: 'admin'
-      }
-    },
-    ]
+    // children: [
+    //   { path: 'usermanager',
+    //   component: UserManagerComponent,
+    //   canActivate: [RoleGuardService],
+    //   data: {
+    //     expectedRole: 'admin'
+    //   }
+    // },
+    // { path: 'articlemanager',
+    //   component: ArticleManagerComponent,
+    //   canActivate: [RoleGuardService],
+    //   data: {
+    //     expectedRole: 'admin'
+    //   }
+    // },
+    // ]
 
   },
   {
@@ -65,6 +66,11 @@ const routes: Routes = [
   {
     path: 'postBlog/:id',
     component: BlogPostComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'article',
+    component: ArticleManagerTestComponent,
     canActivate: [AuthGuard]
   },
 
