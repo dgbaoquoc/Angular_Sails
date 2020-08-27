@@ -39,6 +39,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -85,6 +86,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     NgbModule
   ],
   providers: [AuthService, EventService, AuthGuard,

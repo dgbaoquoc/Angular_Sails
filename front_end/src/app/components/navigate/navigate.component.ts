@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import * as jwt_decode from "jwt-decode";
 
 @Component({
   selector: 'app-navigate',
@@ -9,14 +10,20 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./navigate.component.css']
 })
 export class NavigateComponent implements OnInit {
-
+  public infor = {
+    email: "",
+    role: ""
+  }
   constructor(private _auth:AuthService,
               private _router:Router,
               private _toastr: ToastrService) { }
 
   ngOnInit(): void {
+    var x = localStorage.getItem('token');
+    this.infor.email = jwt_decode(x).email;
+    this.infor.role = jwt_decode(x).role;
   }
- 
+
   checkLoggedUser() {
     if(this._auth.loggedIn()) {
       return true
@@ -24,7 +31,7 @@ export class NavigateComponent implements OnInit {
       return false
     }
   }
-  
+
   logOutUser() {
     if(confirm("Do you want to logout?")) {
       this._auth.logOut();

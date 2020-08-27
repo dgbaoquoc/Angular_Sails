@@ -12,6 +12,7 @@ var randomstring = require('randomstring');
 var nodemailer = require('nodemailer');
 var jwtDecode = require('jwt-decode');
 
+
 var transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -214,9 +215,26 @@ module.exports = {
       })
   },
 
-  showArticlesTest: function(req, res) {
-    console.log(1);
-    console.log(req.query);
+  test123: function(req, res) {
+    var sort = req.query.sort;
+    var order = req.query.order;
+    var page = req.query.page;
+    var skipPost = 5 * (page-1);
+    var total_count;
+    Articles.count()
+      .then(function(data) {
+        total_count = data;
+        return Articles.find().sort(sort + " " + order).limit(5).skip(skipPost);
+      })
+      .then(function(data1) {
+        res.json({
+          items: data1,
+          total_count: total_count
+        })
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
   },
 
     getUser: (req, res) => {

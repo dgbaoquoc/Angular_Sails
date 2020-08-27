@@ -9,25 +9,18 @@
         <li class="nav-item active">
           <a class="nav-link" routerLink="/homepage">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;">Create Article</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" *ngIf="checkLoggedUser()" (click)="logOutUser()" >Log Out</a>
-        </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" *ngIf="checkLoggedUser()" (click)="test()" >Test</a>
+        </li> -->
+        <li ngbDropdown class="d-inline-block text-right nav-item">
+          <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle>User</a>
+          <ul ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <li><a ngbDropdownItem class="dropdown-item" title="{{infor.email}}" style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{infor.email}}</a></li>
+            <li><a ngbDropdownItem class="dropdown-item">{{infor.role}}</a></li>
+            <li><a ngbDropdownItem class="dropdown-item" data-toggle="modal" data-target="#exampleModalCenter" style="cursor: pointer;">Create Article</a></li>
+            <li style="cursor: pointer;"><a ngbDropdownItem class="dropdown-item" *ngIf="checkLoggedUser()" (click)="logOutUser()">Log Out</a></li>
+          </ul>
         </li>
-        <div class="col">
-          <div ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button ngbDropdownItem>Action - 1</button>
-              <button ngbDropdownItem>Another Action</button>
-              <button ngbDropdownItem>Something else is here</button>
-            </div>
-          </div>
-        </div>
       </ul>
 
     </div>
