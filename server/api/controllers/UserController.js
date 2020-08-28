@@ -219,17 +219,19 @@ module.exports = {
     var sort = req.query.sort;
     var order = req.query.order;
     var page = req.query.page;
-    var skipPost = 5 * (page-1);
+    var limit = req.query.limit;
+    var search = req.query.search;
+    var skipPost = limit * (page-1);
     var total_count;
-    Articles.count()
+    Articles.count({articlename: {contains: search}})
       .then(function(data) {
         total_count = data;
-        return Articles.find().sort(sort + " " + order).limit(5).skip(skipPost);
+        return Articles.find({articlename: {contains: search}}).sort(sort + " " + order).limit(limit).skip(skipPost);
       })
       .then(function(data1) {
         res.json({
-          items: data1,
-          total_count: total_count
+          "items": data1,
+          "total_count": total_count
         })
       })
       .catch(function(err) {
