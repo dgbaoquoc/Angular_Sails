@@ -1,0 +1,37 @@
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered haha" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{header1}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin">
+          <div class="form-group" data-validate = "Articlename is required">
+            <label for="articlename">{{header2}}</label>
+            <input  type="text" class="form-control" name="articlename" [(ngModel)]="data.articlename || data.email">
+            <small class="form-text text-muted">Please share the {{header2}}.</small>
+          </div>
+          <div class="form-group" data-validate = "Article is required" *ngIf="checkArticle()">
+            <label for="article">Your Article:</label>
+            <textarea class="form-control rounded-0" id="article" rows="10" [(ngModel)]="data.article" name="article" id="article"></textarea>
+          </div>
+          <div class="form-group" *ngIf="checkUser()">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option value=""></option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary" id="submit" *ngIf="checkArticle()" (click)="saveArticle(data.id)">Save Article</button>
+            <button type="button" data-dismiss="modal" class="btn btn-primary" id="submit" *ngIf="checkUser()" (click)="saveUser(data.id)">Save User</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

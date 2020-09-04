@@ -24,12 +24,12 @@ export class NavigateComponent implements OnInit {
     this.infor.role = jwt_decode(x).role;
   }
 
-  checkLoggedUser() {
-    if(this._auth.loggedIn()) {
-      return true
-    } else {
-      return false
+  checkRoleUser() {
+    var x = localStorage.getItem('token');
+    if(jwt_decode(x).role == "admin") {
+      return true;
     }
+    return false;
   }
 
   logOutUser() {

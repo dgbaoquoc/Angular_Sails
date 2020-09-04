@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
           res => {
             if (res.status == 'success') {
               localStorage.setItem('token', res.token)
+              localStorage.setItem('refresh', res.refreshToken)
               this._toastr.success("Login successfully")
               this._router.navigate(['/homepage'])
             } else {

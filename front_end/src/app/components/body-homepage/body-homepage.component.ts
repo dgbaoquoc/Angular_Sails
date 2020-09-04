@@ -14,7 +14,7 @@ export class BodyHomepageComponent implements OnInit {
     private _router:Router, private _articlesPostService: ArticlesPostService) { }
 
   ngOnInit(): void {
-
+    
   }
 
 

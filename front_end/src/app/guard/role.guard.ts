@@ -20,7 +20,7 @@ export class RoleGuardService implements CanActivate {
     const tokenPayload = decode(token);
     if (
       !this.auth.loggedIn() ||
-      tokenPayload.role !== expectedRole
+      tokenPayload.role != "admin"
     ) {
       this.router.navigate(['/login']);
       return false;

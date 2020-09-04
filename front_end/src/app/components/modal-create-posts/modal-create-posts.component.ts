@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreatePostsService } from '../../services/create-posts.service';
 import { SendDataService } from '../../services/send-data.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 declare var $: any;
 
 @Component({
@@ -14,7 +16,7 @@ export class ModalCreatePostsComponent implements OnInit {
     articlename: '',
     article: '',
   }
-  constructor(private _createPostsService: CreatePostsService, private _dataService: SendDataService, private toastr: ToastrService) { }
+  constructor(private _createPostsService: CreatePostsService, private _dataService: SendDataService, private toastr: ToastrService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -32,6 +34,10 @@ export class ModalCreatePostsComponent implements OnInit {
         }
         else if(res.status == "fail") {
           self.toastr.error('Created failed!')
+        }
+        else {
+          self.authService.logOut();
+          self.router.navigate(['/login']);
         }
       })
       .catch(function(err) {

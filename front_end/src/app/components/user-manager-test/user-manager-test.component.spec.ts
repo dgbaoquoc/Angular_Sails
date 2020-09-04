@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserManagerComponent } from './user-manager.component';
+import { UserManagerTestComponent } from './user-manager-test.component';
 
-describe('ArticleManagerComponent', () => {
-  let component: UserManagerComponent;
-  let fixture: ComponentFixture<UserManagerComponent>;
+describe('UserManagerTestComponent', () => {
+  let component: UserManagerTestComponent;
+  let fixture: ComponentFixture<UserManagerTestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserManagerComponent ]
+      declarations: [ UserManagerTestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserManagerComponent);
+    fixture = TestBed.createComponent(UserManagerTestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

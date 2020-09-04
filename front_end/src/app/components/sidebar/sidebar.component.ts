@@ -11,19 +11,23 @@ declare var $: any;
 export class SidebarComponent implements OnInit {
   public test = [];
   constructor(private _articlesPostService: ArticlesPostService, private _dataService: SendDataService) { }
-  start = {
-    startArticle: 0,
-    searchArticle: ""
-  }
   public search;
   ngOnInit(): void {
-    var self = this;
+    var header = document.getElementById("myHeader");
+    var sticky = header.getBoundingClientRect().top;
+    window.onscroll = function() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    };
   }
 
-  searchArticles() {
-    var self = this;
-    this.search = $("#articleName").val() ? $("#articleName").val() : "";
-    this._dataService.sendValue(self.search);
-  }
+  // searchArticles() {
+  //   var self = this;
+  //   this.search = $("#articleName").val() ? $("#articleName").val() : "";
+  //   this._dataService.sendValue(self.search.toLowerCase());
+  // }
 
 }

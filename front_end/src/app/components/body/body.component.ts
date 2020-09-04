@@ -7,11 +7,11 @@ import { AuthService } from '../../auth.service'
 declare var $: any;
 
 @Component({
-  selector: 'app-articles',
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+  selector: 'app-body',
+  templateUrl: './body.component.html',
+  styleUrls: ['./body.component.css']
 })
-export class ArticlesComponent implements OnInit {
+export class BodyComponent implements OnInit {
   subscription1: Subscription;
   subscription2: Subscription;
   public test = [];
@@ -22,35 +22,35 @@ export class ArticlesComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    // var self = this;
-    // var x = 500;
-    // this.subscription1 = this._dataService.valueFromSearch$
-    //   .subscribe(function(chris) {
-    //     self.start.startArticle = 0;
-    //     self.start.searchArticle = chris;
-    //     self.takeArticles();
-    //     x = 500;
-    //   })
-    // $(window).scroll(function(){
-    //     var y = $(window).scrollTop();
-    //     if(y >= x) {
-    //         self.start.startArticle += 2;
-    //         self._articlesPostService.getArticles(self.start)
-    //           .subscribe(function(data) {
-    //             if(data.status == "success") {
-    //               for(let i in data.articles) {
-    //                 self.test.push(data.articles[i])
-    //               }
-    //             }
-    //             else {
-    //               self.authService.logOut();
-    //               self.router.navigate(['/login']);
-    //             }
-    //           })
-    //         x += 500;
-    //     }
-    // });
+  ngOnInit(): void {
+    var self= this;
+    var x = 500;
+    this.subscription1 = this._dataService.valueFromSearch$
+      .subscribe(function(chris) {
+        self.start.startArticle = 0;
+        self.start.searchArticle = chris;
+        self.takeArticles();
+        x = 500;
+      })
+    $(window).scroll(function(){
+      var y = $(window).scrollTop();
+      if(y >= x) {
+          self.start.startArticle += 4;
+          self._articlesPostService.getArticles(self.start)
+            .subscribe(function(data) {
+              if(data.status == "success") {
+                for(let i in data.articles) {
+                  self.test.push(data.articles[i])
+                }
+              }
+              else {
+                self.authService.logOut();
+                self.router.navigate(['/login']);
+              }
+            })
+          x += 500;
+      }
+  });
   }
 
   takeArticles() {
@@ -67,7 +67,6 @@ export class ArticlesComponent implements OnInit {
         })
   }
 
-
   read(idArticle) {
     var self = this;
     this.router.navigate(['/postBlog', idArticle]);
@@ -82,6 +81,4 @@ export class ArticlesComponent implements OnInit {
     }
   }
 
-
 }
-

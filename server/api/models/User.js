@@ -26,14 +26,9 @@ module.exports = {
     token: {
       type: 'string',
     },
-    // first_name: {
-    //   type: 'string',
-    //   required: true
-    // },
-    // last_name: {
-    //   type: 'string',
-    //   required: true
-    // },
+    deleted: {
+      type: 'number'
+    },
     createdAt: {
       type: 'ref',
       columnType: 'datetime',

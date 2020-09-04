@@ -22,6 +22,11 @@ module.exports.policies = {
   '*': true,
 
 	UserController: {
+    showArticles: ['isAuthenticated'],
+    postArticle: ['isAuthenticated'],
+    getPost: ['isAuthenticated'],
+    test123: ['isAuthenticated', 'isAdmin'],
+    newToken:  ['isAuthenticated'],
     test: ['isAdmin'],
     getUser: ['isAdmin'],
     editUser: ['isAdmin'],

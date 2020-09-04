@@ -26,15 +26,22 @@ module.exports.routes = {
   'POST /login': 'UserController.login',
   'POST /forgot': 'UserController.forgot',
   'POST /reset-password': 'UserController.resetPassword',
+  'POST /newToken': 'UserController.newToken',
 
   '/test': 'UserController.test',
   'POST /createArticle': 'UserController.postArticle',
   'GET /showArticles': 'UserController.showArticles',
   'GET /register': 'UserController.register',
   'GET /getuser': 'UserController.getUser',
-  'POST /edituser': 'UserController.editUser',
   'GET /getPost': 'UserController.getPost',
   'GET /test123': 'UserController.test123',
+  'POST /deleteArticle': 'UserController.deleteArticle',
+  'GET /editArticle': 'UserController.editArticle',
+  'POST /saveArticle': 'UserController.saveArticle',
+  'GET /test456': 'UserController.test456',
+  'POST /deleteUser': 'UserController.deleteUser',
+  'GET /editUser': 'UserController.editUser',
+  'POST /saveUser': 'UserController.saveUser',
 
 
   //ArticleController

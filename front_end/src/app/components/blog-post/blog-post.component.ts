@@ -3,6 +3,8 @@ import { SendDataService } from '../../services/send-data.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ArticlesPostService } from 'src/app/services/articles-post.service';
+import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-post',
@@ -12,7 +14,7 @@ import { ArticlesPostService } from 'src/app/services/articles-post.service';
 export class BlogPostComponent implements OnInit {
   public postObject;
   subscription: Subscription;
-  constructor(private _dataService: SendDataService, private route: ActivatedRoute, private _articlesPostService: ArticlesPostService) { }
+  constructor(private _dataService: SendDataService, private route: ActivatedRoute, private _articlesPostService: ArticlesPostService, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     var self = this;
@@ -22,7 +24,13 @@ export class BlogPostComponent implements OnInit {
     }
     this.subscription = self._articlesPostService.getPostBlog(idData)
       .subscribe(function(data) {
-        self.postObject = data.post;
+        if(data.status == 'success') {
+          self.postObject = data.post;
+        }
+        else {
+          self.authService.logOut();
+          self.router.navigate(['/login']);
+        }
       })
   }
 

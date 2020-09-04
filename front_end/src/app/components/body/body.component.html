@@ -1,0 +1,26 @@
+<div class="special featured">
+  <div class="container">
+
+    <div class="ab-w3l-spa">
+      <h3 class="tittle">Welcome to Our Resort!</h3>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. ever since the 1500s.Itaque earum rerum hic tenetur a sapiente delectus reiciendis maiores hasellusMaecenas ac hendrerit purus. Lorem ipsum dolor sit amet.Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+
+    </div>
+
+    <app-search></app-search>
+    <div class="w3_agileits_services_grids">
+      <div class="col-md-3 w3_agileits_services_grid hvr-overline-from-center" *ngFor="let x of test" (click)="read(x.id)" style="cursor: pointer;">
+        <div class="w3_agileits_services_grid_agile">
+          <div class="w3_agileits_services_grid_1">
+            <img src="http://placehold.it/240x255" alt="service-img">
+          </div>
+          <h3>{{x.articlename}}</h3>
+          <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{x.article}}</p>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div *ngIf="!test.length" style="text-align: center;">No matching article</div>
+    </div>
+  </div>
+</div>

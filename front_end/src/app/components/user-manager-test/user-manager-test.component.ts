@@ -9,16 +9,13 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SendDataService } from '../../services/send-data.service'
 
-/**
- * @title Table retrieving data through HTTP
- */
 @Component({
-  selector: 'app-article-manager-test',
-  templateUrl: './article-manager-test.component.html',
-  styleUrls: ['./article-manager-test.component.css']
+  selector: 'app-user-manager-test',
+  templateUrl: './user-manager-test.component.html',
+  styleUrls: ['./user-manager-test.component.css']
 })
-export class ArticleManagerTestComponent implements AfterViewInit {
-  displayedColumns: string[] = ['articlename', 'article', 'author', 'dateCreated', 'tools'];
+export class UserManagerTestComponent implements AfterViewInit {
+  displayedColumns: string[] = ['id', 'email', 'role', 'tools'];
   exampleDatabase: ExampleHttpDatabase | null;
   dataArr: [];
   searchValue = "";
@@ -81,8 +78,8 @@ export class ArticleManagerTestComponent implements AfterViewInit {
 
   deletePost(id: any) {
     var self = this;
-    if(confirm("Do you want to delete this article?")) {
-      this.authService.deleteArticle({id: id})
+    if(confirm("Do you want to delete this user?")) {
+      this.authService.deleteUser({id: id})
         .subscribe(function(data) {
           if(data.status == "success") {
             window.location.reload();
@@ -95,28 +92,23 @@ export class ArticleManagerTestComponent implements AfterViewInit {
     }
   }
 
-  view(id: any) {
-    this.router.navigate(['/postBlog', id]);
-  }
-
   edit(id: any) {
     var self = this;
-    this.authService.editArticle({id: id})
+    this.authService.editUser({id: id})
       .subscribe(function(data) {
         if(data.status = "success") {
-          self.sendDataService.sendDataArticle(data.data);
+          self.sendDataService.sendDataUser(data.data);
         }
       })
   }
+
 }
-
-
 
 export class ExampleHttpDatabase {
   constructor(private _httpClient: HttpClient) {}
 
   getRepoIssues(sort: any, order: any, page: any, limit: any, search: any): Observable<any> {
-    const href = 'http://localhost:1337/test123';
+    const href = 'http://localhost:1337/test456';
     const requestUrl =
     `${href}?sort=${sort}&order=${order}&page=${page + 1}&limit=${limit}&search=${search}`;
 

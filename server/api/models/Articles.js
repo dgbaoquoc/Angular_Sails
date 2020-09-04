@@ -21,6 +21,9 @@ module.exports = {
     author: {
       type: 'string'
     },
+    deleted: {
+      type: 'number'
+    },
     createdAt: {
       type: 'ref',
       columnType: 'datetime',
