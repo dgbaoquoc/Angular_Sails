@@ -42,6 +42,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { QuocariclesComponent } from './components/quocaricles/quocaricles.component';
 import { PostdetailComponent } from './components/postdetail/postdetail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TestUserManagerComponent } from './components/test-user-manager/test-user-manager.component';
+import { DialogUserComponent } from './components/dialog-user/dialog-user.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule, MatTooltip} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -68,6 +72,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PageNotFoundComponent,
     QuocariclesComponent,
     PostdetailComponent,
+    TestUserManagerComponent,
+    DialogUserComponent,
   ],
   imports: [
     CommonModule,
@@ -85,6 +91,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatFormFieldModule,
     MatButtonModule,
     MatDialogModule,
+    MatIconModule,
+    MatTooltipModule,
     NgbModule,
   ],
   providers: [AuthService, EventService, AuthGuard, ArticlesComponent,
@@ -94,6 +102,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     multi: true
   }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogUserComponent]
 })
 export class AppModule { }

@@ -35,6 +35,8 @@ module.exports.routes = {
   'GET /register': 'UserController.register',
   'GET /getuser': 'UserController.getUser',
   'POST /edituser': 'UserController.editUser',
+  'POST /deleteuser': 'UserController.deleteUser',
+  'POST /updateuser': 'UserController.updateUser',
   'GET /getPost': 'UserController.getPost',
 
 

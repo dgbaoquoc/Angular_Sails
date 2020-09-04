@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Edit User</h2>
+
+<mat-dialog-content >
+    <mat-form-field style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input #emailInput required matInput [value]="dialogEmail">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+        <mat-label>First Name</mat-label>
+        <input #firstNameInput required matInput [value]="dialogFirstName">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+        <mat-label>Last Name</mat-label>
+        <input #lastNameInput required matInput [value]="dialogLastName" >
+    </mat-form-field>
+    <mat-form-field appearance="legacy" style="width: 45%">
+        <mat-label>Role</mat-label>
+        <select #roleInput matNativeControl required>
+            <option>{{dialogRole}}</option>
+            <ng-container *ngIf = "dialogRole === 'Admin'">
+                <option value="User">User</option>
+            </ng-container>
+            <ng-container *ngIf = "dialogRole === 'User'">
+                <option value="Admin">Admin</option>
+            </ng-container>
+        </select>
+    </mat-form-field>
+    <mat-form-field style="float: right; width: 50%;">
+        <mat-label>Password</mat-label>
+        <input #passwordInput matInput type="password">
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions style="display: contents;">
+    <button  mat-dialog-close class="mat-raised-button">Close</button>
+    <button style="float: right;" class="mat-raised-button mat-primary" (click)="updateUser()">Save</button>
+</mat-dialog-actions>

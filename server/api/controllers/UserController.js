@@ -208,22 +208,32 @@ module.exports = {
       });
   },
     getUser: (req, res) => {
-        var arrayUser = [];
-
-        User.find({})
-            .then((userData) => {   
-                return res.json(userData)
+        var total
+        var sort = req.query.sort
+        var limit = req.query.pageSize
+        var order = req.query.order
+        var page = req.query.page
+        var skipPage = (limit * (page - 1))
+        var filter = req.query.filter
+        User.count({ email: {contains: filter},  isDeleted: {'!=': '1'} })
+            .then(data => {
+                total = data
+                return User.find({ or:  [ { email: { contains: filter } }, { first_name: {contains: filter } }, { last_name: {contains: filter } }],  isDeleted: {'!=': '1'} }).skip(skipPage).limit(limit).sort(sort + " " + order )
+            })
+            .then(detail => {
+                return res.json({
+                    "total_count": total,
+                    "items": detail
+                })
             })
             .catch( (err) => {
                 if (err) {
                     console.log(err)
                 }
             })
-                
     },
     
     editUser: (req, res) => {
-        console.log("hello")
         let id = req.param("id");
         console.log(id)
         User.findOne({id:id})
@@ -235,6 +245,58 @@ module.exports = {
             .catch (err => {
                 console.log(err)
             })
+    },
+
+    deleteUser: (req, res ) => {
+        let id = req.body.id
+        User.findOne({id: id})
+            .then(user => {
+                return User.update(user.id, {isDeleted: 1})
+            })
+            .then(data => {
+                return res.json ({
+                    status: "success",
+                    message: "Deleted Successfully"
+                })
+            })
+            .catch (err => {
+                if (err) {
+                    console.log(err)
+                }
+            })
+    },
+
+    updateUser: (req, res ) => {
+        let id = req.body.user.id
+        let firstName = req.body.user.firstName
+        let lastName = req.body.user.lastName
+        let password = req.body.user.password
+        let role = req.body.user.role
+        if ( password === "" ) {
+            User.update(id, {first_name: firstName, last_name: lastName, role: role})
+                .then(data => {
+                    return res.json({
+                        status: "success",
+                        message: "Updated Successfully"
+                    })
+                })
+        } else {
+            let newPassword = bcrypt.hashSync(password, 12);
+            User.update(id, {first_name: firstName, last_name: lastName, role: role, password: newPassword})
+                .then( err => {
+                    if (err) {
+                        res.json({
+                            status: "error",
+                            message: "Error !"
+                        })
+                    } else {
+                        return res.json({
+                            status: "success",
+                            message: "Updated Successfully"
+                        })
+                    }
+                })
+        }
     },
 
   getPost: function(req, res) {

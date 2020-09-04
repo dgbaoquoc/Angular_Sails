@@ -14,3 +14,10 @@ th.mat-sort-header-sorted {
 .mat-header-row {
     background-color: #2c99c2;
 }
+.mat-paginator {
+    background-color:  #2c99c2;
+}
+
+.mat-icon-button {
+    outline: none;
+}

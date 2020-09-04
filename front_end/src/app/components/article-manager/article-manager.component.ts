@@ -4,6 +4,8 @@ import { Article } from '../../models/Article';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatInput } from '@angular/material/input';
+
 
 declare var $:any
 
@@ -14,7 +16,7 @@ declare var $:any
 })
 export class ArticleManagerComponent implements OnInit {
     ELEMENT_DATA: Article[];
-    displayedColumns:string[] = ['id', 'title', 'author', 'date', 'description', 'content', 'actions'];
+    displayedColumns:string[] = ['id', 'title', 'author', 'date', 'actions'];
     dataSource = new MatTableDataSource<Article>(this.ELEMENT_DATA)
 
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;

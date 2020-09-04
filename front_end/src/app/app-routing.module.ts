@@ -17,6 +17,7 @@ import { ResetpassComponent } from './components/resetpass/resetpass.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { QuocariclesComponent } from './components/quocaricles/quocaricles.component';
 import { PostdetailComponent } from './components/postdetail/postdetail.component';
+import { TestUserManagerComponent } from './components/test-user-manager/test-user-manager.component';
 
 
 const routes: Routes = [
@@ -75,6 +76,10 @@ const routes: Routes = [
     path: 'posts/:id',
     component: PostdetailComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'test',
+    component: TestUserManagerComponent
   },
   {path: '**', component: NotfoundComponent},
 ];

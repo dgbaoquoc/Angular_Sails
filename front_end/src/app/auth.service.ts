@@ -13,6 +13,9 @@ export class AuthService {
   private _loginUrl = "http://localhost:1337/login"
   private _testUrl ="http://localhost:1337/test"
   private _getCurrentUserUrl ="http://localhost:1337/getCurrentUser"
+  private _getUser ="http://localhost:1337/getuser"
+  private _deleteUser ="http://localhost:1337/deleteuser"
+  private _updateUser ="http://localhost:1337/updateuser"
 
   // Articles
   private _getArticlesUrl = "http://localhost:1337/getPosts"
@@ -42,7 +45,16 @@ export class AuthService {
   }
   
   getUser() {
-    return this.http.get("http://localhost:1337/getuser")
+    return this.http.get<any>(this._getUser)
+  }
+
+  deleteUser(id) {
+    console.log(id)
+    return this.http.post<any>(this._deleteUser, id)
+  }
+
+  updateUser(user) {
+    return this.http.post<any>(this._updateUser, user)
   }
 
   getArticle() {
